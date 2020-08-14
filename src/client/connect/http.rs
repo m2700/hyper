@@ -553,10 +553,10 @@ fn connect(
 ) -> io::Result<impl Future<Output = io::Result<TcpStream>>> {
     use socket2::{Domain, Protocol, Socket, Type};
     let domain = match *addr {
-        SocketAddr::V4(_) => Domain::ipv4(),
-        SocketAddr::V6(_) => Domain::ipv6(),
+        SocketAddr::V4(_) => Domain::IPV4,
+        SocketAddr::V6(_) => Domain::IPV6,
     };
-    let socket = Socket::new(domain, Type::stream(), Some(Protocol::tcp()))?;
+    let socket = Socket::new(domain, Type::STREAM, Some(Protocol::TCP))?;
 
     if reuse_address {
         socket.set_reuse_address(true)?;
